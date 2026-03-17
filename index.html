@@ -411,35 +411,6 @@
                 opacity: 1;
             }
         }
-
-        .music-control {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid white;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 12px;
-            z-index: 1000;
-            transition: all 0.3s ease;
-            display: none;
-        }
-
-        .music-control.show {
-            display: block;
-        }
-
-        #page1 .music-control {
-            display: none !important;
-        }
-
-        .music-control:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
-        }
     </style>
 </head>
 <body>
@@ -448,9 +419,6 @@
         <source src="sholawat.mp3" type="audio/mpeg">
         Browser Anda tidak mendukung audio element.
     </audio>
-
-    <!-- Music Control Button -->
-    <button id="musicControl" class="music-control" onclick="toggleMusic()">🔊 Musik</button>
 
     <!-- Page 1: Input Page -->
     <div id="page1" class="page active">
@@ -521,7 +489,6 @@
     <script>
         // Music Control Setup
         const bgMusic = document.getElementById('bgMusic');
-        const musicControl = document.getElementById('musicControl');
         bgMusic.volume = 0.3;
         let musicPlaying = false;
 
@@ -531,22 +498,9 @@
                 playPromise.then(() => {
                     musicPlaying = true;
                     bgMusic.muted = false;
-                    musicControl.textContent = '🔊 Musik';
                 }).catch(error => {
-                    console.log('Autoplay blocked by browser. Click to enable music.');
-                    musicControl.classList.add('show');
+                    console.log('Autoplay blocked by browser.');
                 });
-            }
-        }
-
-        function toggleMusic() {
-            if (musicPlaying) {
-                bgMusic.pause();
-                musicPlaying = false;
-                musicControl.textContent = '🔇 Musik';
-            } else {
-                bgMusic.muted = false;
-                playMusic();
             }
         }
 
@@ -558,14 +512,6 @@
                 bgMusic.muted = false;
             }, 500);
         });
-
-        // Allow user to unlock music with click
-        document.addEventListener('click', () => {
-            if (!musicPlaying) {
-                bgMusic.muted = false;
-                playMusic();
-            }
-        }, { once: false });
 
         // Try to play on DOMContentLoaded
         document.addEventListener('DOMContentLoaded', () => {
