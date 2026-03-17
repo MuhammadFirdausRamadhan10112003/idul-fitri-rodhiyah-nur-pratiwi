@@ -231,12 +231,6 @@
         }
 
         @media (max-width: 768px) {
-            body {
-                align-items: flex-start;
-                padding: 10px 0;
-                min-height: auto;
-            }
-
             .container {
                 margin: 10px auto;
                 padding: 15px 12px;
@@ -310,12 +304,12 @@
         /* Greeting Page Styles */
         .greeting-container {
             background: linear-gradient(135deg, #8b1b4d 0%, #a01858 100%);
-            min-height: auto;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
-            overflow: hidden;
+            overflow: auto;
             padding: 20px 0;
         }
 
@@ -464,7 +458,8 @@
 
         @media (max-width: 768px) {
             .greeting-container {
-                padding: 10px 0;
+                padding: 15px 0;
+                min-height: 100vh;
             }
 
             .greeting-content {
